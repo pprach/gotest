@@ -1,0 +1,36 @@
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-wqz4b[0m
+{"level":"warn","ts":1586466767.5590494,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1586466767.5593867,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-k2wlk[0m
+{"level":"warn","ts":1586466768.5572116,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1586466768.5615733,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-pprach-gotest-pr-3-serverless-j-d7k5s-fljhg[0m
+{"level":"warn","ts":1586466773.6251917,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1586466774.7121844,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/******/gotest.git @ master in path /workspace/source"}
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:13816f06f1ad9435dcbb37aabab36b85772c31cb,3:36b26cb0c04f51b1a3880812cba2d23d7a738f30
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 36b26cb0c04f51b1a3880812cba2d23d7a738f30: 13816f06f1ad9435dcbb37aabab36b85772c31cb:
+DEBUG: ran git fetch --unshallow origin 36b26cb0c04f51b1a3880812cba2d23d7a738f30: 13816f06f1ad9435dcbb37aabab36b85772c31cb: in 
+DEBUG: JX_LOG_LEVEL=error LC_ALL=C git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 13816f06f1ad9435dcbb37aabab36b85772c31cb
+DEBUG: ran git reset --hard 13816f06f1ad9435dcbb37aabab36b85772c31cb in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 36b26cb0c04f51b1a3880812cba2d23d7a738f30
+DEBUG: ran git merge 36b26cb0c04f51b1a3880812cba2d23d7a738f30 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 13816f06f1ad9435dcbb37aabab36b85772c31cb..HEAD
+Merged SHA 295dfc9382ce4b519b7a410ec74d0d89fd182c0c with commit message 'Merge commit '36b26cb0c04f51b1a3880812cba2d23d7a738f30'' into base branch master
+Merged SHA 36b26cb0c04f51b1a3880812cba2d23d7a738f30 with commit message 'Return json response' into base branch master
+
+Showing logs for build [32mpprach-gotest-pr-3-serverless-j-d7k5s-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-make-linux[0m
+make: *** No rule to make target `linux'.  Stop.
+[31m
+Pipeline failed on stage 'from-build-pack' : container 'step-build-make-linux'. The execution of the pipeline has stopped.[0m
