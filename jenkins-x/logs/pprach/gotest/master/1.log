@@ -1,0 +1,136 @@
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-credential-initializer-wpxtt[0m
+{"level":"warn","ts":1586418059.2102876,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1586418059.2107663,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-working-dir-initializer-sr7m7[0m
+{"level":"warn","ts":1586418062.8394036,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: open /var/run/ko/HEAD: no such file or directory"}
+{"level":"info","ts":1586418062.840825,"logger":"fallback-logger","caller":"bash/main.go:64","msg":"Successfully executed command \"sh -c mkdir -p /workspace/source\"; output "}
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-place-tools[0m
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-source-pprach-gotest-master-g4ckq-58zrt[0m
+{"level":"warn","ts":1586418107.0995495,"logger":"fallback-logger","caller":"logging/config.go:69","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/0.8.0-**-support-backwards-incompats\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1586418108.3587606,"logger":"fallback-logger","caller":"git/git.go:103","msg":"Successfully cloned https://github.com/******/gotest.git @ v0.0.1 in path /workspace/source"}
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:3978348c5aaf25bff568d3692ca08d3089ef6f18
+WARNING: no SHAs to merge, falling back to initial cloned commit
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-setup-jx-git-credentials[0m
+Generated Git credentials file /workspace/xdg_config/git/credentials
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-make-build[0m
+CGO_ENABLED=0 GO15VENDOREXPERIMENT=1 go build -ldflags '' -o bin/gotest main.go
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-container-build[0m
+[36mINFO[0m[0000] Resolved base name golang to golang          
+[36mINFO[0m[0000] Resolved base name alpine to alpine          
+[36mINFO[0m[0000] Using dockerignore file: /workspace/source/.dockerignore 
+[36mINFO[0m[0000] Resolved base name golang to golang          
+[36mINFO[0m[0000] Resolved base name alpine to alpine          
+[36mINFO[0m[0000] Retrieving image manifest golang             
+[36mINFO[0m[0001] Retrieving image manifest golang             
+[36mINFO[0m[0002] Retrieving image manifest alpine             
+[36mINFO[0m[0003] Retrieving image manifest alpine             
+[36mINFO[0m[0004] Built cross stage deps: map[0:[/go/go]]      
+[36mINFO[0m[0004] Retrieving image manifest golang             
+[36mINFO[0m[0005] Retrieving image manifest golang             
+[36mINFO[0m[0006] Checking for cached layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:31b17faf0501c6374f0e1ef4a620680ca9d5c68e7e9090848ae4fbeaa46c7de5... 
+[36mINFO[0m[0006] No cached layer found for cmd COPY main.go . 
+[36mINFO[0m[0006] Unpacking rootfs as cmd COPY main.go . requires it. 
+[36mINFO[0m[0021] Taking snapshot of full filesystem...        
+[36mINFO[0m[0024] Resolving paths                              
+[36mINFO[0m[0027] COPY main.go .                               
+[36mINFO[0m[0027] Resolving paths                              
+[36mINFO[0m[0027] Taking snapshot of files...                  
+[36mINFO[0m[0027] RUN go build                                 
+[36mINFO[0m[0027] cmd: /bin/sh                                 
+[36mINFO[0m[0027] args: [-c go build]                          
+[36mINFO[0m[0027] Pushing layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:31b17faf0501c6374f0e1ef4a620680ca9d5c68e7e9090848ae4fbeaa46c7de5 to cache now 
+[36mINFO[0m[0028] Taking snapshot of full filesystem...        
+[36mINFO[0m[0028] Resolving paths                              
+[36mINFO[0m[0031] Pushing layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:c01c92d6094caff4a86fa44dc416c4bd30764f775c70b677e6cd12dfab057d65 to cache now 
+[33mWARN[0m[0031] error uploading layer to cache: failed to push to destination 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:31b17faf0501c6374f0e1ef4a620680ca9d5c68e7e9090848ae4fbeaa46c7de5: NAME_UNKNOWN: The repository with name 'todo/cache' does not exist in the registry with id '540350320930' 
+[36mINFO[0m[0031] Saving file /go/go for later use             
+[36mINFO[0m[0031] Deleting filesystem...                       
+[36mINFO[0m[0032] Retrieving image manifest alpine             
+[36mINFO[0m[0033] Retrieving image manifest alpine             
+[36mINFO[0m[0034] Checking for cached layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:94c3e7e7684ff64dd4c5d8823d72e1a423b7416e1f325689c1617b4dfb84381c... 
+[36mINFO[0m[0034] No cached layer found for cmd RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 
+[36mINFO[0m[0034] cmd: EXPOSE                                  
+[36mINFO[0m[0034] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0034] Unpacking rootfs as cmd RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 requires it. 
+[36mINFO[0m[0034] Taking snapshot of full filesystem...        
+[36mINFO[0m[0034] Resolving paths                              
+[36mINFO[0m[0034] RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 
+[36mINFO[0m[0034] cmd: /bin/sh                                 
+[36mINFO[0m[0034] args: [-c mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2] 
+[36mINFO[0m[0034] Taking snapshot of full filesystem...        
+[36mINFO[0m[0034] Resolving paths                              
+[36mINFO[0m[0034] Pushing layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:94c3e7e7684ff64dd4c5d8823d72e1a423b7416e1f325689c1617b4dfb84381c to cache now 
+[36mINFO[0m[0034] COPY --from=0 /go/go .                       
+[36mINFO[0m[0034] Resolving paths                              
+[36mINFO[0m[0034] Taking snapshot of files...                  
+[36mINFO[0m[0035] Pushing layer 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:17e1b00e2788a1f2560cab8233d4481d7be6eae08a9f68e12fcc18b1fda500b0 to cache now 
+[36mINFO[0m[0035] EXPOSE 8080                                  
+[36mINFO[0m[0035] cmd: EXPOSE                                  
+[36mINFO[0m[0035] Adding exposed port: 8080/tcp                
+[36mINFO[0m[0035] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0035] ENTRYPOINT /go                               
+[36mINFO[0m[0035] No files changed in this command, skipping snapshotting. 
+[33mWARN[0m[0035] error uploading layer to cache: failed to push to destination 540350320930.dkr.ecr.eu-north-1.amazonaws.com/todo/cache:94c3e7e7684ff64dd4c5d8823d72e1a423b7416e1f325689c1617b4dfb84381c: NAME_UNKNOWN: The repository with name 'todo/cache' does not exist in the registry with id '540350320930' 
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-build-post-build[0m
+no CVE provider running in the current ** namespace so skip adding image to be analysed
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-changelog[0m
+Converted /workspace/source/charts/gotest to an unshallow repository
+Generating change log from git ref 3ca3b7f49969fef46ceb03accd84e133c6a597a8 => 3e28c00eb8feb00a5b146364a1880840d4b36293
+Associating user x-0 in users.jenkins.io with email github@prach.pl to git GitProvider user with login -0 as emails match
+Adding label jenkins.io/git-github-userid=-0 to user x-0 in users.jenkins.io
+WARNING: Failed to enrich commit 3978348c5aaf25bff568d3692ca08d3089ef6f18 with issues: User.jenkins.io "x-0" is invalid: metadata.labels: Invalid value: "-0": a valid label must be an empty string or consist of alphanumeric characters, '-', '_' or '.', and must start and end with an alphanumeric character (e.g. 'MyValue',  or 'my_value',  or '12345', regex used for validation is '(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?')
+Finding issues in commit messages using git format
+WARNING: Failed to enrich commit 566b6d360b7d6e5f184daa6d5fbbebebf417a367 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 566b6d360b7d6e5f184daa6d5fbbebebf417a367 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 14c5c5b8c8ee344be3c8e4f2426baee5f362f6af with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 14c5c5b8c8ee344be3c8e4f2426baee5f362f6af with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 5f896ec732d4376054f32fceab4708514126aa5e with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 5f896ec732d4376054f32fceab4708514126aa5e with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 5be5123818ad4a7d7b7984d89d9d75039cc59fec with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 5be5123818ad4a7d7b7984d89d9d75039cc59fec with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 89cdbf367aceca4c40d290988fb433db46efdc66 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 89cdbf367aceca4c40d290988fb433db46efdc66 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 98df3c423e57bc869bf238bd5fea5d78464569f2 with issues: users.jenkins.io "x-0" already exists
+WARNING: Failed to enrich commit 98df3c423e57bc869bf238bd5fea5d78464569f2 with issues: users.jenkins.io "x-0" already exists
+WARNING: No release found for ******/gotest and tag v0.0.1 so creating a new release
+Updated the release information at https://github.com/******/gotest/releases/tag/v0.0.1
+generated: /workspace/source/charts/gotest/templates/release.yaml
+Created Release gotest-0-0-1 resource in namespace **
+Updating PipelineActivity ******-gotest-master-1 with version 0.0.1
+Updated PipelineActivities ******-gotest-master-1 with release notes URL: https://github.com/******/gotest/releases/tag/v0.0.1
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-helm-release[0m
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: storage.googleapis.com https://storage.googleapis.com/chartmuseum.jenkins-x.io
+Successfully added Helm repository storage.googleapis.com.
+Adding missing Helm repo: jenkins-x-chartmuseum http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository jenkins-x-chartmuseum.
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Uploading chart file gotest-0.0.1.tgz to http://jenkins-x-chartmuseum:8080/api/charts
+Received 201 response: {"saved":true}
+
+Showing logs for build [32mpprach-gotest-master-g4ckq-1[0m stage [32mfrom-build-pack[0m and container [32mstep-promote-jx-promote[0m
+WARNING: prow based install so skip waiting for the merge of Pull Requests to go green as currently there is an issue with gettingstatuses from the PR, see https://github.com/jenkins-x/**/issues/2410
+WARNING: No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Promoting app gotest version 0.0.1 to namespace **-staging
+WARNING: 
+Created Pull Request: https://github.com/******/environment-dragonchatter-staging/pull/1
+Added label updatebot to Pull Request https://github.com/******/environment-dragonchatter-staging/pull/1
+got git provider status pending from PR https://github.com/******/environment-dragonchatter-staging/pull/1
+got git provider status pending from PR https://github.com/******/environment-dragonchatter-staging/pull/1
+got git provider status pending from PR https://github.com/******/environment-dragonchatter-staging/pull/1
+got git provider status pending from PR https://github.com/******/environment-dragonchatter-staging/pull/1
+Pull Request https://github.com/******/environment-dragonchatter-staging/pull/1 is merged at sha 3733ce11cadb6b8d7f568491c461b482d281417d
+Pull Request merged but we are not waiting for the update pipeline to complete!
+WARNING: Could not find the service URL in namespace **-staging for names gotest, **-gotest, **-staging-gotest
