@@ -7,7 +7,28 @@ import (
     "net/http"
     "os"
     "strconv"
+    "time"
+
+    "github.com/dgrijalva/jwt-go"
 )
+
+const validTokenTime = 5
+
+var jwtKey = []byte(os.Getenv("jwt_key"))
+
+var users = map[string]string{
+    os.Getenv("user_name"): os.Getenv("user_pass"),
+}
+
+type Credentials struct{
+    Password string `json:"password"`
+    Username string `json:"username"`
+}
+
+type Claims struct {
+    Username string `json:"username"`
+    jwt.StandardClaims
+}
 
 type ResponseJson struct {
     Return string `json:"value"`
@@ -15,6 +36,47 @@ type ResponseJson struct {
 
 type ResponseJsonList struct {
     field []ResponseJson `json:"field"`
+}
+
+func Signin(w http.ResponseWriter, r *http.Request) {
+    var creds Credentials
+
+    err := json.NewDecoder(r.Body).Decode(&creds)
+    if err != nil {
+        w.WriteHeader(http.StatusBadRequest)
+        return
+    }
+
+    dbPass := users[creds.Username]
+
+    if dbPass == "" || dbPass != creds.Password {
+        w.WriteHeader(http.StatusUnauthorized)
+        return
+    }
+
+    expirationTime := time.Now().Add(validTokenTime * time.Minute)
+
+    claims := &Claims{
+        Username: creds.Username,
+        StandardClaims: jwt.StandardClaims{
+            ExpiresAt: expirationTime.Unix(),
+        },
+    }
+
+    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+    tokenString, err:= token.SignedString(jwtKey)
+
+    if err != nil {
+        w.WriteHeader(http.StatusInternalServerError)
+        return
+    }
+
+    http.SetCookie(w, &http.Cookie{
+        Name: "token",
+        Value: tokenString,
+        Expires: expirationTime,
+    })
 }
 
 func handlerCheck(w http.ResponseWriter, r *http.Request) {
@@ -104,6 +166,42 @@ func handlerVersion(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "REPLACE_THIS_BY_VERSION_NUMBER")
 }
 
+func Welcome(w http.ResponseWriter, r *http.Request) {
+    // We can obtain the session token from the requests cookies, which come with every request
+	c, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tknStr := c.Value
+
+	claims := &Claims{}
+
+	tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	w.Write([]byte(fmt.Sprintf("Welcome %s!", claims.Username)))
+}
+
 func main() {
     http.HandleFunc("/check", handlerCheck)
     http.HandleFunc("/status", handlerCheck)
@@ -114,5 +212,7 @@ func main() {
     http.HandleFunc("/v1/env", handlerEnv)
     http.HandleFunc("/v1/json", handlerJSON)
     http.HandleFunc("/v1/version", handlerVersion)
+    http.HandleFunc("/v1/signin", Signin)
+    http.HandleFunc("/v1/admin", Welcome)
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
