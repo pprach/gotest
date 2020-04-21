@@ -1,0 +1,76 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-task
+spec:
+  params:
+    # These may be overridden, but provide sensible defaults.
+    - name: directory
+      type: string
+      description: The directory containing the build context.
+      default: /workspace/git-repo
+    - name: dockerfileName
+      type: string
+      description: The name of the Dockerfile
+      default: pprach/test
+  resources:
+    inputs:
+      - name: git-repo
+        type: git
+#    outputs:
+#      - name: builtImage
+#        type: image
+  steps:
+    - name: dockertag-create
+      image: pprach/test:git-0.0.2
+      workingDir: "$(params.directory)"
+      script: |
+        #!/usr/bin/env bash
+        git rev-parse --short HEAD > git_sha
+#      command: 
+#      - git
+#      args:
+#        [
+##          "ls"
+##          "/bin/ls",
+##          "/",
+#          "rev-parse",
+#          "--short",
+#          "HEAD",
+#        ]
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+    - name: dockerfile-build
+      image: docker:dind
+      workingDir: "$(params.directory)"
+      script: |
+        #!/usr/bin/env sh
+        docker build -t $(params.dockerfileName):$(cat git_sha) .
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+    - name: dockerimage-push
+      image: docker:dind
+      workingDir: "$(params.directory)"
+      script: |
+        #!/usr/bin/env sh
+        docker push $(params.dockerfileName):$(cat git_sha)
+      volumeMounts:
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+
+
+#    - name: dockerfile-push
+#      image: gcr.io/cloud-builders/docker
+#      args: ["push", "$(resources.outputs.image.url)"]
+#      volumeMounts:
+#        - name: docker-socket
+#          mountPath: /var/run/docker.sock
+
+  # As an implementation detail, this Task mounts the host's daemon socket.
+  volumes:
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket

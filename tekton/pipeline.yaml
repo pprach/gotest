@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: app-build-pipeline
+spec:
+  resources:
+    - name: git-repo
+      type: git
+#    - name: docker-image
+#      type: image
+  tasks:
+#    - name: appsody-build
+    - name: build-app-dockerimage
+      taskRef:
+        name: build-task
+      resources:
+        inputs:
+        - name: git-repo
+          resource: git-repo
+#        - name: docker-image
+#          resource: docker-image
+#      params:
+#      - name: app-deploy-file-name
+#        value: app-deploy.yaml

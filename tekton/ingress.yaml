@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: listener
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: listener.eks.aws.prach.pl
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: el-listener-my
+          servicePort: 8080

@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: build-task-task-run43
+spec:
+  taskRef:
+    name: build-task
+#  params:
+#    - name: pathToDockerFile
+#      value: Dockerfile
+#    - name: pathToContext
+#      value: /workspace/docker-source/examples/microservices/leeroy-web #configure: may change according to your source
+  resources:
+    inputs:
+      - name: git-repo
+        resourceRef:
+          name: git-repo
+#    outputs:
+#      - name: builtImage
+#        resourceRef:
+#          name: skaffold-image-leeroy-web    

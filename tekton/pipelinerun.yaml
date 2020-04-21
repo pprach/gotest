@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: app-build-pipelinerun-00
+spec:
+  timeout: "0h10m0s"  
+  pipelineRef:
+    name: app-build-pipeline
+  resources:
+    - name: git-repo
+      resourceRef:
+        name: git-repo
+#    - name: docker-image
+#      resourceRef:
+#        name: docker-image
