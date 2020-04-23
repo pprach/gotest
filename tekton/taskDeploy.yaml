@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-task
+  name: deploy-task
 spec:
   params:
     # These may be overridden, but provide sensible defaults.
@@ -27,38 +27,29 @@ spec:
       script: |
         #!/usr/bin/env bash
         git rev-parse --short HEAD > git_sha
-#      command: 
-#      - git
-#      args:
-#        [
-##          "ls"
-##          "/bin/ls",
-##          "/",
-#          "rev-parse",
-#          "--short",
-#          "HEAD",
-#        ]
       volumeMounts:
         - name: docker-socket
           mountPath: /var/run/docker.sock
-    - name: dockerfile-build
-      image: docker:dind
+    - name: deploy
+      image: alpine/helm:3.1.1
       workingDir: "$(params.directory)"
       script: |
         #!/usr/bin/env sh
-        docker build -t $(params.dockerfileName):$(cat git_sha) .
+        ls -l 
+        echo ""
+        helm install go-app ./helm/gotest --set image.repository=$(params.dockerfileName)  --set image.version=$(cat git_sha) -n dev
       volumeMounts:
         - name: docker-socket
           mountPath: /var/run/docker.sock
-    - name: dockerimage-push
-      image: docker:dind
-      workingDir: "$(params.directory)"
-      script: |
-        #!/usr/bin/env sh
-        docker push $(params.dockerfileName):$(cat git_sha)
-      volumeMounts:
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
+#    - name: dockerimage-push
+#      image: docker:dind
+#      workingDir: "$(params.directory)"
+#      script: |
+#        #!/usr/bin/env sh
+#        docker push $(params.dockerfileName):$(cat git_sha)
+#      volumeMounts:
+#        - name: docker-socket
+#          mountPath: /var/run/docker.sock
 
 
 #    - name: dockerfile-push

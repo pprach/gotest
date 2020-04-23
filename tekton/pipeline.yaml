@@ -17,6 +17,16 @@ spec:
         inputs:
         - name: git-repo
           resource: git-repo
+    - name: deploy-app
+      taskRef:
+        name: deploy-task
+      runAfter:
+      - build-app-dockerimage
+      resources:
+        inputs:
+        - name: git-repo
+          resource: git-repo
+#        - name: docker-image
 #        - name: docker-image
 #          resource: docker-image
 #      params:
