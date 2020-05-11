@@ -49,7 +49,6 @@ Selector labels
 {{- define "gotest.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "gotest.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Values.image.version | quote }}
 {{- end -}}
 
 {{/*
