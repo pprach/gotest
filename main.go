@@ -80,7 +80,7 @@ func handlerEnv(w http.ResponseWriter, r *http.Request) {
 }
 
 func handlerJSON(w http.ResponseWriter, r *http.Request) {
-    resJson := ResponseJson{"87"}
+    resJson := ResponseJson{"88"}
 
     newsJson, err := json.Marshal(resJson)
     if err != nil {
